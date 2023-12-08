@@ -112,30 +112,34 @@ This comprehensive analysis aims to empower your team with actionable insights, 
 
 ## Code
 
-For the rest of the code, check the [SQL_queries.sql](https://github.com/Princekrampah/WalmartSalesAnalysis/blob/master/SQL_queries.sql) file
+For the rest of the code, check the [SQLQuery.sql](https://github.com/Justin-Thomas-34/pizza-sales-analysis/blob/main/SQLQuery.sql) file
 
 ```sql
--- Create database
-CREATE DATABASE IF NOT EXISTS walmartSales;
+-- all rows
+SELECT * FROM pizza_sales;
 
--- Create table
-CREATE TABLE IF NOT EXISTS sales(
-	invoice_id VARCHAR(30) NOT NULL PRIMARY KEY,
-    branch VARCHAR(5) NOT NULL,
-    city VARCHAR(30) NOT NULL,
-    customer_type VARCHAR(30) NOT NULL,
-    gender VARCHAR(30) NOT NULL,
-    product_line VARCHAR(100) NOT NULL,
-    unit_price DECIMAL(10,2) NOT NULL,
-    quantity INT NOT NULL,
-    tax_pct FLOAT(6,4) NOT NULL,
-    total DECIMAL(12, 4) NOT NULL,
-    date DATETIME NOT NULL,
-    time TIME NOT NULL,
-    payment VARCHAR(15) NOT NULL,
-    cogs DECIMAL(10,2) NOT NULL,
-    gross_margin_pct FLOAT(11,9),
-    gross_income DECIMAL(12, 4),
-    rating FLOAT(2, 1)
-);
+-- Total Revenue
+SELECT 
+        round(sum(total_price),2) AS total_revenue
+FROM 
+        pizza_sales;
+
+-- Average Order Value
+SELECT 
+        round(sum(total_price)/count(distinct(order_id)),2) AS Avg_order_value
+FROM 
+        pizza_sales;
+
+-- Total Pizzas Sold
+SELECT 
+        sum(quantity) AS Total_pizza_sold
+FROM
+        pizza_sales;
+
+-- Total Orders
+
+SELECT
+        count(distinct(order_id)) AS Total_orders
+FROM 
+        pizza_sales;
 ```
